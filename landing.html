@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>melllen · Projects</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #0f1117;
+      color: #e2e8f0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ── Header ────────────────────────────────────────────── */
+    header {
+      text-align: center;
+      padding: 64px 24px 48px;
+    }
+    .avatar {
+      width: 72px; height: 72px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      margin: 0 auto 20px;
+      box-shadow: 0 0 0 4px rgba(59,130,246,0.2);
+    }
+    header h1 {
+      font-size: 2rem;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      color: #f1f5f9;
+    }
+    header p {
+      margin-top: 8px;
+      color: #64748b;
+      font-size: 1rem;
+    }
+
+    /* ── Grid ──────────────────────────────────────────────── */
+    main {
+      flex: 1;
+      max-width: 860px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 0 20px 72px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+      gap: 20px;
+    }
+
+    /* ── Tile ──────────────────────────────────────────────── */
+    .tile {
+      display: block;
+      text-decoration: none;
+      background: #1e2433;
+      border: 1px solid #2d3348;
+      border-radius: 16px;
+      padding: 28px 28px 24px;
+      transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .tile::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, var(--accent-a) 0%, transparent 60%);
+      opacity: 0;
+      transition: opacity 0.25s ease;
+      border-radius: inherit;
+    }
+    .tile:hover {
+      transform: translateY(-4px);
+      border-color: var(--accent-b);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.4), 0 0 0 1px var(--accent-b);
+    }
+    .tile:hover::before { opacity: 1; }
+
+    .tile-icon {
+      font-size: 2.4rem;
+      line-height: 1;
+      margin-bottom: 16px;
+      display: block;
+      position: relative;
+    }
+    .tile-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #f1f5f9;
+      margin-bottom: 6px;
+      position: relative;
+    }
+    .tile-desc {
+      font-size: 0.88rem;
+      color: #94a3b8;
+      line-height: 1.55;
+      position: relative;
+    }
+    .tile-arrow {
+      position: absolute;
+      top: 28px;
+      right: 26px;
+      font-size: 1.1rem;
+      color: #475569;
+      transition: color 0.18s, transform 0.18s;
+    }
+    .tile:hover .tile-arrow {
+      color: var(--accent-b);
+      transform: translate(3px, -3px);
+    }
+
+    .tile-tag {
+      display: inline-block;
+      margin-top: 14px;
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      background: var(--tag-bg);
+      color: var(--tag-fg);
+      position: relative;
+    }
+
+    /* Per-tile accent colors */
+    .tile-skyline  { --accent-a: rgba(0,48,135,0.25); --accent-b: #4d88ff; --tag-bg: rgba(0,48,135,0.35); --tag-fg: #93b8ff; }
+    .tile-names    { --accent-a: rgba(99,102,241,0.18); --accent-b: #818cf8; --tag-bg: rgba(99,102,241,0.25); --tag-fg: #a5b4fc; }
+    .tile-stocks   { --accent-a: rgba(16,185,129,0.15); --accent-b: #34d399; --tag-bg: rgba(16,185,129,0.20); --tag-fg: #6ee7b7; }
+    .tile-bills    { --accent-a: rgba(0,51,141,0.22);   --accent-b: #60a5fa; --tag-bg: rgba(0,51,141,0.30);   --tag-fg: #93c5fd; }
+    .tile-airports { --accent-a: rgba(6,182,212,0.15);  --accent-b: #22d3ee; --tag-bg: rgba(6,182,212,0.20);  --tag-fg: #67e8f9; }
+
+    /* ── Footer ────────────────────────────────────────────── */
+    footer {
+      text-align: center;
+      padding: 20px;
+      font-size: 0.76rem;
+      color: #334155;
+    }
+    footer a { color: #475569; text-decoration: none; }
+    footer a:hover { color: #64748b; }
+
+    @media (max-width: 520px) {
+      header { padding: 44px 16px 32px; }
+      header h1 { font-size: 1.5rem; }
+      .grid { grid-template-columns: 1fr; }
+      .tile { padding: 22px 20px 20px; }
+      main { padding: 0 12px 48px; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="avatar">🛠️</div>
+  <h1>melllen</h1>
+  <p>A collection of personal projects</p>
+</header>
+
+<main>
+  <div class="grid">
+
+    <a class="tile tile-skyline" href="https://melllen.github.io/SkylineFinder">
+      <span class="tile-icon">🌶️</span>
+      <span class="tile-arrow">↗</span>
+      <div class="tile-title">Skyline Finder</div>
+      <div class="tile-desc">Find the nearest Skyline Chili from any address. Includes an interactive map with photos from past visits.</div>
+      <span class="tile-tag">Maps · Ohio</span>
+    </a>
+
+    <a class="tile tile-names" href="https://melllen.github.io/BabyNames">
+      <span class="tile-icon">👶</span>
+      <span class="tile-arrow">↗</span>
+      <div class="tile-title">Baby Name Explorer</div>
+      <div class="tile-desc">Search any name and see its popularity over time using SSA birth records from 1880 to 2024.</div>
+      <span class="tile-tag">Data · History</span>
+    </a>
+
+    <a class="tile tile-stocks" href="https://melllen.github.io/famStocks">
+      <span class="tile-icon">📈</span>
+      <span class="tile-arrow">↗</span>
+      <div class="tile-title">Stock Tracker</div>
+      <div class="tile-desc">Live stock prices for Intuit, JPMorgan, and BP. Auto-refreshes every 30 seconds while the market is open.</div>
+      <span class="tile-tag">Finance · Live</span>
+    </a>
+
+    <a class="tile tile-airports" href="https://melllen.github.io/AiportFinder/">
+      <span class="tile-icon">✈️</span>
+      <span class="tile-arrow">↗</span>
+      <div class="tile-title">Airport Finder</div>
+      <div class="tile-desc">Find nearby airports from any address, ranked by distance and traffic volume. Includes ATL direct-flight and rental car info.</div>
+      <span class="tile-tag">Maps · Travel</span>
+    </a>
+
+    <a class="tile tile-bills" href="https://melllen.github.io/BillsQuiz">
+      <span class="tile-icon">🏈</span>
+      <span class="tile-arrow">↗</span>
+      <div class="tile-title">Bills Roster Quiz</div>
+      <div class="tile-desc">Can you name every player on the Buffalo Bills? You have 15 minutes. Go.</div>
+      <span class="tile-tag">Quiz · NFL</span>
+    </a>
+
+  </div>
+</main>
+
+<footer>
+  <a href="https://github.com/melllen" target="_blank" rel="noopener">github.com/melllen</a>
+</footer>
+
+</body>
+</html>
